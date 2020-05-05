@@ -1,6 +1,7 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "company")
@@ -11,6 +12,9 @@ public class Company {
     private Integer id;
 
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
+    private List<User> users;
 
     public Integer getId() {
         return id;
@@ -26,5 +30,13 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
