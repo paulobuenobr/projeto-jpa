@@ -1,6 +1,7 @@
 package br.sc.senai.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -19,6 +20,9 @@ public class User {
     @ManyToOne
     @JoinColumn(name="id_company")
     private Company company;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Phone> phones;
 
     public Integer getId() {
         return id;
