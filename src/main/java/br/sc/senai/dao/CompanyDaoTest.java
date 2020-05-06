@@ -6,6 +6,7 @@ import br.sc.senai.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class CompanyDaoTest {
@@ -21,7 +22,9 @@ public class CompanyDaoTest {
 
         //insert();
 
-        listUsers();
+        //listUsers();
+
+        listCompanies();
 
         entityManager.close();
         factory.close();
@@ -57,6 +60,18 @@ public class CompanyDaoTest {
         }
 
         entityManager.getTransaction().commit();
+
+    }
+
+    public static void listCompanies() {
+
+        Query query = entityManager.createNamedQuery("Company.listAllOrderByName");
+
+        List<Company> companies = query.getResultList();
+
+        for (Company company : companies) {
+            System.out.println(company.getName());
+        }
 
     }
 }
